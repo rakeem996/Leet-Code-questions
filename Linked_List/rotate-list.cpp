@@ -1,13 +1,15 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
+#include<iostream>
+#include<vector>
+using namespace std;
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
 class Solution {
 public:
     ListNode* reverse(ListNode* head)
@@ -52,8 +54,45 @@ public:
         head = reverse(head);
 
         return head;
+  
+    }
 
+    void insertNode(ListNode*& head, int val) {
+    ListNode* newNode = new ListNode(val);
+    if (head == NULL) {
+        head = newNode;
+        return;
+    }
 
-        
+    ListNode* temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = newNode;
+}
+
+    void printList(ListNode* head)
+    {
+        ListNode* temp = head;
+        while(temp)
+        {
+            cout<<temp->val<<" ";
+            temp = temp->next;
+        }
     }
 };
+
+int main() {
+    Solution s;
+    ListNode* head = NULL;
+    s.insertNode(head, 1);
+    s.insertNode(head, 2);
+    s.insertNode(head, 3);
+    s.insertNode(head, 2);
+    s.insertNode(head, 1);
+    s.printList(head);
+    head = s.rotateRight(head, 2);
+    cout<<endl;
+    s.printList(head);
+    return 0;
+}
