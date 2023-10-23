@@ -63,7 +63,70 @@ public:
             }
             ptr = ptr->next;
             temp = temp->next;
+        }/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* next;
+    Node* random;
+    
+    Node(int _val) {
+        val = _val;
+        next = NULL;
+        random = NULL;
+    }
+};
+*/
+
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        
+        if(!head) return head;
+
+        //add ele between list
+        Node* ptr = head;
+
+        while(ptr)
+        {
+            Node* newNode = new Node(ptr->val);
+            newNode->next = ptr->next;
+            ptr->next = newNode;
+            ptr = ptr->next->next;
         }
+
+        //add random pointers
+        ptr = head;
+
+        while(ptr)
+        {
+            if(ptr->random != NULL)
+            {
+                ptr->next->random = ptr->random->next;
+            }
+            ptr = ptr->next->next;
+        }
+
+        //remove the previos nodes;
+
+        Node* dummy = new Node(0);
+        Node* temp = dummy;
+        ptr = head;
+
+        while(ptr)
+        {
+            Node* fast = ptr->next->next;
+            temp->next = ptr->next;
+            ptr->next = fast;
+            temp = temp->next;
+            ptr = fast;
+        }
+
+        return dummy->next;
+
+    }
+};
 
         return newHead;
     }
