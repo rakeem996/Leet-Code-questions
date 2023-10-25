@@ -1,4 +1,7 @@
+#include<iostream>
 #include <vector>
+using namespace std;
+
 class MyHashMap {
 private:
     struct KeyValue{
@@ -54,17 +57,22 @@ public:
         {
             if(it->key == key)
             {
-                buckets[index].erase(i);
+                buckets[index].erase(it);
                 return;
             }
         }
     }
 };
 
-/**
- * Your MyHashMap object will be instantiated and called as such:
- * MyHashMap* obj = new MyHashMap();
- * obj->put(key,value);
- * int param_2 = obj->get(key);
- * obj->remove(key);
- */
+int main()
+{
+    MyHashMap* obj = new MyHashMap();
+    int key = 1;
+    int value = 10;
+    obj->put(key,value);
+    int param_2 = obj->get(key);
+    cout<<param_2<<endl;
+    obj->remove(key);
+    return 0;
+}
+
